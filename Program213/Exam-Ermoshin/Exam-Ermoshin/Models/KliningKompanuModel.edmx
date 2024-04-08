@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище EtoKonechErmoshinModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Rabotniki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipDeatelnostiId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rashodniki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kolichestvo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipDeatelnosti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserZayavka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ZayavkaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zakazkhik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Organizatia" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KolichestvoKomnat" Type="int" />
+          <Property Name="Ploshad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZaplanirovannieUborka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatePlanirovaniua" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zayavka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateViezda" Type="date" Nullable="false" />
+          <Property Name="ZakazkhikId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZayavkaRabotniki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zayavka" Type="int" Nullable="false" />
+          <Property Name="Rabotniki" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZayavkaRashodniki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZayavkaId" Type="int" Nullable="false" />
+          <Property Name="RashodnikiId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Rabotniki_TipDeatelnosti">
+          <End Role="TipDeatelnosti" Type="Self.TipDeatelnosti" Multiplicity="1" />
+          <End Role="Rabotniki" Type="Self.Rabotniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipDeatelnosti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rabotniki">
+              <PropertyRef Name="TipDeatelnostiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserZayavka_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserZayavka" Type="Self.UserZayavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserZayavka">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserZayavka_Zayavka">
+          <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="1" />
+          <End Role="UserZayavka" Type="Self.UserZayavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserZayavka">
+              <PropertyRef Name="ZayavkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zayavka_Zakazkhik">
+          <End Role="Zakazkhik" Type="Self.Zakazkhik" Multiplicity="1" />
+          <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zakazkhik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zayavka">
+              <PropertyRef Name="ZakazkhikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRabotniki_Rabotniki">
+          <End Role="Rabotniki" Type="Self.Rabotniki" Multiplicity="1" />
+          <End Role="ZayavkaRabotniki" Type="Self.ZayavkaRabotniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rabotniki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZayavkaRabotniki">
+              <PropertyRef Name="Rabotniki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRabotniki_Zayavka">
+          <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="1" />
+          <End Role="ZayavkaRabotniki" Type="Self.ZayavkaRabotniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZayavkaRabotniki">
+              <PropertyRef Name="Zayavka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRashodniki_Rashodniki">
+          <End Role="Rashodniki" Type="Self.Rashodniki" Multiplicity="1" />
+          <End Role="ZayavkaRashodniki" Type="Self.ZayavkaRashodniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rashodniki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZayavkaRashodniki">
+              <PropertyRef Name="RashodnikiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRashodniki_Zayavka">
+          <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="1" />
+          <End Role="ZayavkaRashodniki" Type="Self.ZayavkaRashodniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZayavkaRashodniki">
+              <PropertyRef Name="ZayavkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EtoKonechErmoshinModelContainer">
+          <EntitySet Name="Rabotniki" EntityType="Self.Rabotniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rashodniki" EntityType="Self.Rashodniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipDeatelnosti" EntityType="Self.TipDeatelnosti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserZayavka" EntityType="Self.UserZayavka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zakazkhik" EntityType="Self.Zakazkhik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZaplanirovannieUborka" EntityType="Self.ZaplanirovannieUborka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zayavka" EntityType="Self.Zayavka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZayavkaRabotniki" EntityType="Self.ZayavkaRabotniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZayavkaRashodniki" EntityType="Self.ZayavkaRashodniki" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rabotniki_TipDeatelnosti" Association="Self.FK_Rabotniki_TipDeatelnosti">
+            <End Role="TipDeatelnosti" EntitySet="TipDeatelnosti" />
+            <End Role="Rabotniki" EntitySet="Rabotniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserZayavka_User" Association="Self.FK_UserZayavka_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserZayavka" EntitySet="UserZayavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserZayavka_Zayavka" Association="Self.FK_UserZayavka_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="UserZayavka" EntitySet="UserZayavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zayavka_Zakazkhik" Association="Self.FK_Zayavka_Zakazkhik">
+            <End Role="Zakazkhik" EntitySet="Zakazkhik" />
+            <End Role="Zayavka" EntitySet="Zayavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRabotniki_Rabotniki" Association="Self.FK_ZayavkaRabotniki_Rabotniki">
+            <End Role="Rabotniki" EntitySet="Rabotniki" />
+            <End Role="ZayavkaRabotniki" EntitySet="ZayavkaRabotniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRabotniki_Zayavka" Association="Self.FK_ZayavkaRabotniki_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="ZayavkaRabotniki" EntitySet="ZayavkaRabotniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRashodniki_Rashodniki" Association="Self.FK_ZayavkaRashodniki_Rashodniki">
+            <End Role="Rashodniki" EntitySet="Rashodniki" />
+            <End Role="ZayavkaRashodniki" EntitySet="ZayavkaRashodniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRashodniki_Zayavka" Association="Self.FK_ZayavkaRashodniki_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="ZayavkaRashodniki" EntitySet="ZayavkaRashodniki" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EtoKonechErmoshinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EtoKonechErmoshinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rabotniki" EntityType="EtoKonechErmoshinModel.Rabotniki" />
+          <EntitySet Name="Rashodniki" EntityType="EtoKonechErmoshinModel.Rashodniki" />
+          <EntitySet Name="Role" EntityType="EtoKonechErmoshinModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="EtoKonechErmoshinModel.sysdiagrams" />
+          <EntitySet Name="TipDeatelnosti" EntityType="EtoKonechErmoshinModel.TipDeatelnosti" />
+          <EntitySet Name="User" EntityType="EtoKonechErmoshinModel.User" />
+          <EntitySet Name="UserZayavka" EntityType="EtoKonechErmoshinModel.UserZayavka" />
+          <EntitySet Name="Zakazkhik" EntityType="EtoKonechErmoshinModel.Zakazkhik" />
+          <EntitySet Name="ZaplanirovannieUborka" EntityType="EtoKonechErmoshinModel.ZaplanirovannieUborka" />
+          <EntitySet Name="Zayavka" EntityType="EtoKonechErmoshinModel.Zayavka" />
+          <EntitySet Name="ZayavkaRabotniki" EntityType="EtoKonechErmoshinModel.ZayavkaRabotniki" />
+          <EntitySet Name="ZayavkaRashodniki" EntityType="EtoKonechErmoshinModel.ZayavkaRashodniki" />
+          <AssociationSet Name="FK_Rabotniki_TipDeatelnosti" Association="EtoKonechErmoshinModel.FK_Rabotniki_TipDeatelnosti">
+            <End Role="TipDeatelnosti" EntitySet="TipDeatelnosti" />
+            <End Role="Rabotniki" EntitySet="Rabotniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRabotniki_Rabotniki" Association="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Rabotniki">
+            <End Role="Rabotniki" EntitySet="Rabotniki" />
+            <End Role="ZayavkaRabotniki" EntitySet="ZayavkaRabotniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRashodniki_Rashodniki" Association="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Rashodniki">
+            <End Role="Rashodniki" EntitySet="Rashodniki" />
+            <End Role="ZayavkaRashodniki" EntitySet="ZayavkaRashodniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="EtoKonechErmoshinModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserZayavka_User" Association="EtoKonechErmoshinModel.FK_UserZayavka_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserZayavka" EntitySet="UserZayavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserZayavka_Zayavka" Association="EtoKonechErmoshinModel.FK_UserZayavka_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="UserZayavka" EntitySet="UserZayavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zayavka_Zakazkhik" Association="EtoKonechErmoshinModel.FK_Zayavka_Zakazkhik">
+            <End Role="Zakazkhik" EntitySet="Zakazkhik" />
+            <End Role="Zayavka" EntitySet="Zayavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRabotniki_Zayavka" Association="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="ZayavkaRabotniki" EntitySet="ZayavkaRabotniki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZayavkaRashodniki_Zayavka" Association="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="ZayavkaRashodniki" EntitySet="ZayavkaRashodniki" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Rabotniki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TipDeatelnostiId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipDeatelnosti" Relationship="EtoKonechErmoshinModel.FK_Rabotniki_TipDeatelnosti" FromRole="Rabotniki" ToRole="TipDeatelnosti" />
+          <NavigationProperty Name="ZayavkaRabotniki" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Rabotniki" FromRole="Rabotniki" ToRole="ZayavkaRabotniki" />
+        </EntityType>
+        <EntityType Name="Rashodniki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kolichestvo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ZayavkaRashodniki" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Rashodniki" FromRole="Rashodniki" ToRole="ZayavkaRashodniki" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="EtoKonechErmoshinModel.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipDeatelnosti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rabotniki" Relationship="EtoKonechErmoshinModel.FK_Rabotniki_TipDeatelnosti" FromRole="TipDeatelnosti" ToRole="Rabotniki" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="EtoKonechErmoshinModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="UserZayavka" Relationship="EtoKonechErmoshinModel.FK_UserZayavka_User" FromRole="User" ToRole="UserZayavka" />
+        </EntityType>
+        <EntityType Name="UserZayavka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ZayavkaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="EtoKonechErmoshinModel.FK_UserZayavka_User" FromRole="UserZayavka" ToRole="User" />
+          <NavigationProperty Name="Zayavka" Relationship="EtoKonechErmoshinModel.FK_UserZayavka_Zayavka" FromRole="UserZayavka" ToRole="Zayavka" />
+        </EntityType>
+        <EntityType Name="Zakazkhik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Organizatia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KolichestvoKomnat" Type="Int32" />
+          <Property Name="Ploshad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Zayavka" Relationship="EtoKonechErmoshinModel.FK_Zayavka_Zakazkhik" FromRole="Zakazkhik" ToRole="Zayavka" />
+        </EntityType>
+        <EntityType Name="ZaplanirovannieUborka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePlanirovaniua" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Zayavka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateViezda" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ZakazkhikId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserZayavka" Relationship="EtoKonechErmoshinModel.FK_UserZayavka_Zayavka" FromRole="Zayavka" ToRole="UserZayavka" />
+          <NavigationProperty Name="Zakazkhik" Relationship="EtoKonechErmoshinModel.FK_Zayavka_Zakazkhik" FromRole="Zayavka" ToRole="Zakazkhik" />
+          <NavigationProperty Name="ZayavkaRabotniki" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Zayavka" FromRole="Zayavka" ToRole="ZayavkaRabotniki" />
+          <NavigationProperty Name="ZayavkaRashodniki" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Zayavka" FromRole="Zayavka" ToRole="ZayavkaRashodniki" />
+        </EntityType>
+        <EntityType Name="ZayavkaRabotniki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zayavka" Type="Int32" Nullable="false" />
+          <Property Name="Rabotniki" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rabotniki1" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Rabotniki" FromRole="ZayavkaRabotniki" ToRole="Rabotniki" />
+          <NavigationProperty Name="Zayavka1" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Zayavka" FromRole="ZayavkaRabotniki" ToRole="Zayavka" />
+        </EntityType>
+        <EntityType Name="ZayavkaRashodniki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZayavkaId" Type="Int32" Nullable="false" />
+          <Property Name="RashodnikiId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rashodniki" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Rashodniki" FromRole="ZayavkaRashodniki" ToRole="Rashodniki" />
+          <NavigationProperty Name="Zayavka" Relationship="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Zayavka" FromRole="ZayavkaRashodniki" ToRole="Zayavka" />
+        </EntityType>
+        <Association Name="FK_Rabotniki_TipDeatelnosti">
+          <End Type="EtoKonechErmoshinModel.TipDeatelnosti" Role="TipDeatelnosti" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.Rabotniki" Role="Rabotniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipDeatelnosti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rabotniki">
+              <PropertyRef Name="TipDeatelnostiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRabotniki_Rabotniki">
+          <End Type="EtoKonechErmoshinModel.Rabotniki" Role="Rabotniki" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.ZayavkaRabotniki" Role="ZayavkaRabotniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rabotniki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZayavkaRabotniki">
+              <PropertyRef Name="Rabotniki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRashodniki_Rashodniki">
+          <End Type="EtoKonechErmoshinModel.Rashodniki" Role="Rashodniki" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.ZayavkaRashodniki" Role="ZayavkaRashodniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rashodniki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZayavkaRashodniki">
+              <PropertyRef Name="RashodnikiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Type="EtoKonechErmoshinModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserZayavka_User">
+          <End Type="EtoKonechErmoshinModel.User" Role="User" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.UserZayavka" Role="UserZayavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserZayavka">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserZayavka_Zayavka">
+          <End Type="EtoKonechErmoshinModel.Zayavka" Role="Zayavka" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.UserZayavka" Role="UserZayavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserZayavka">
+              <PropertyRef Name="ZayavkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zayavka_Zakazkhik">
+          <End Type="EtoKonechErmoshinModel.Zakazkhik" Role="Zakazkhik" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.Zayavka" Role="Zayavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zakazkhik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zayavka">
+              <PropertyRef Name="ZakazkhikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRabotniki_Zayavka">
+          <End Type="EtoKonechErmoshinModel.Zayavka" Role="Zayavka" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.ZayavkaRabotniki" Role="ZayavkaRabotniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZayavkaRabotniki">
+              <PropertyRef Name="Zayavka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZayavkaRashodniki_Zayavka">
+          <End Type="EtoKonechErmoshinModel.Zayavka" Role="Zayavka" Multiplicity="1" />
+          <End Type="EtoKonechErmoshinModel.ZayavkaRashodniki" Role="ZayavkaRashodniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZayavkaRashodniki">
+              <PropertyRef Name="ZayavkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EtoKonechErmoshinModelContainer" CdmEntityContainer="EtoKonechErmoshinEntities">
+          <EntitySetMapping Name="Rabotniki">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Rabotniki">
+              <MappingFragment StoreEntitySet="Rabotniki">
+                <ScalarProperty Name="TipDeatelnostiId" ColumnName="TipDeatelnostiId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rashodniki">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Rashodniki">
+              <MappingFragment StoreEntitySet="Rashodniki">
+                <ScalarProperty Name="Kolichestvo" ColumnName="Kolichestvo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipDeatelnosti">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.TipDeatelnosti">
+              <MappingFragment StoreEntitySet="TipDeatelnosti">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserZayavka">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.UserZayavka">
+              <MappingFragment StoreEntitySet="UserZayavka">
+                <ScalarProperty Name="ZayavkaId" ColumnName="ZayavkaId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zakazkhik">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Zakazkhik">
+              <MappingFragment StoreEntitySet="Zakazkhik">
+                <ScalarProperty Name="Ploshad" ColumnName="Ploshad" />
+                <ScalarProperty Name="KolichestvoKomnat" ColumnName="KolichestvoKomnat" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Organizatia" ColumnName="Organizatia" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZaplanirovannieUborka">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.ZaplanirovannieUborka">
+              <MappingFragment StoreEntitySet="ZaplanirovannieUborka">
+                <ScalarProperty Name="DatePlanirovaniua" ColumnName="DatePlanirovaniua" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zayavka">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Zayavka">
+              <MappingFragment StoreEntitySet="Zayavka">
+                <ScalarProperty Name="ZakazkhikId" ColumnName="ZakazkhikId" />
+                <ScalarProperty Name="DateViezda" ColumnName="DateViezda" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZayavkaRabotniki">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.ZayavkaRabotniki">
+              <MappingFragment StoreEntitySet="ZayavkaRabotniki">
+                <ScalarProperty Name="Rabotniki" ColumnName="Rabotniki" />
+                <ScalarProperty Name="Zayavka" ColumnName="Zayavka" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZayavkaRashodniki">
+            <EntityTypeMapping TypeName="EtoKonechErmoshinModel.ZayavkaRashodniki">
+              <MappingFragment StoreEntitySet="ZayavkaRashodniki">
+                <ScalarProperty Name="RashodnikiId" ColumnName="RashodnikiId" />
+                <ScalarProperty Name="ZayavkaId" ColumnName="ZayavkaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

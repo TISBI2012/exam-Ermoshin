@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2619e7c097ca40b7ad8603931fd9736c" Name="Diagram1">
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.Rabotniki" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.Rashodniki" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.Role" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.TipDeatelnosti" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.User" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.UserZayavka" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.Zakazkhik" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.ZaplanirovannieUborka" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.Zayavka" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.ZayavkaRabotniki" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="EtoKonechErmoshinModel.ZayavkaRashodniki" Width="1.5" PointX="5.25" PointY="3.875" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_Rabotniki_TipDeatelnosti" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Rabotniki" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Rashodniki" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_User_Role" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_UserZayavka_User" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_UserZayavka_Zayavka" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_Zayavka_Zakazkhik" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_ZayavkaRabotniki_Zayavka" />
+        <AssociationConnector Association="EtoKonechErmoshinModel.FK_ZayavkaRashodniki_Zayavka" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище EtoKonechErmoshinModelContainer" CdmEntityContainer="EtoKonechErmoshinEntities">
+    <EntitySetMapping Name="Rabotniki">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Rabotniki">
+        <MappingFragment StoreEntitySet="Rabotniki">
+          <ScalarProperty Name="TipDeatelnostiId" ColumnName="TipDeatelnostiId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rashodniki">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Rashodniki">
+        <MappingFragment StoreEntitySet="Rashodniki">
+          <ScalarProperty Name="Kolichestvo" ColumnName="Kolichestvo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipDeatelnosti">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.TipDeatelnosti">
+        <MappingFragment StoreEntitySet="TipDeatelnosti">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserZayavka">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.UserZayavka">
+        <MappingFragment StoreEntitySet="UserZayavka">
+          <ScalarProperty Name="ZayavkaId" ColumnName="ZayavkaId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zakazkhik">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Zakazkhik">
+        <MappingFragment StoreEntitySet="Zakazkhik">
+          <ScalarProperty Name="Ploshad" ColumnName="Ploshad" />
+          <ScalarProperty Name="KolichestvoKomnat" ColumnName="KolichestvoKomnat" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Organizatia" ColumnName="Organizatia" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZaplanirovannieUborka">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.ZaplanirovannieUborka">
+        <MappingFragment StoreEntitySet="ZaplanirovannieUborka">
+          <ScalarProperty Name="DatePlanirovaniua" ColumnName="DatePlanirovaniua" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zayavka">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.Zayavka">
+        <MappingFragment StoreEntitySet="Zayavka">
+          <ScalarProperty Name="ZakazkhikId" ColumnName="ZakazkhikId" />
+          <ScalarProperty Name="DateViezda" ColumnName="DateViezda" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZayavkaRabotniki">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.ZayavkaRabotniki">
+        <MappingFragment StoreEntitySet="ZayavkaRabotniki">
+          <ScalarProperty Name="Rabotniki" ColumnName="Rabotniki" />
+          <ScalarProperty Name="Zayavka" ColumnName="Zayavka" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZayavkaRashodniki">
+      <EntityTypeMapping TypeName="EtoKonechErmoshinModel.ZayavkaRashodniki">
+        <MappingFragment StoreEntitySet="ZayavkaRashodniki">
+          <ScalarProperty Name="RashodnikiId" ColumnName="RashodnikiId" />
+          <ScalarProperty Name="ZayavkaId" ColumnName="ZayavkaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
